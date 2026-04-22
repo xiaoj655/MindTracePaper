@@ -30,3 +30,5 @@
 ~$*.pptx
 *.tmp
 *.thm
+
+.codex

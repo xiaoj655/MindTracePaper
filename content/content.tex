@@ -3,47 +3,24 @@
 \section{引言}
 \subsection{研究背景与意义}
 
-\app{Word} 不难用，但是想用得漂亮还得费一番功夫。
+近年来，AI 模型技术发展迅猛，尤其是大语言模型（Large Language Model, LLM）在自然语言处理领域的突破性进展和落地应用。
+人们逐渐抛弃传统的搜索引擎转而直接使用 AI 软件获取信息的场景越来越多。
+但受限于模型训练时的输入数据，模型对训练数据之外的信息缺乏感知能力，这也就导致了 LLM 模型、在某些特定领域的应用受限，无法满足用户的个性化需求。
 
-对于小白来说，（注意！！是对于小白来说，不要跟我杠！！！我就是 \app{Word} 小白，高端玩法玩不动）：
-
-插入个图片，下面的说明文字是不是插入文本框？那文本框要不要跟图片“组合”？是不是直接圈没法圈起来？因为图片要变成浮动格式，和文本框绑定后再改回嵌入格式，你说蛋疼不蛋疼？不组合？那有一定概率发生你的图片在上一页，描述文字在下一页。呵呵。
-
-插入参考文献，手动编辑？我的天哪，一百多个文献，中间插一个，怎么改序号？
-很好，可以用交叉引用，一个个编辑文献格式？
-很好，可以用 \app{endnote} 或者 \app{noteexpress} 的插入功能，你有没有发现插入是个宏，\oper{ctrl+z} 的时候会烦死你啊……
-
-叮叮！让我们祭出 \LaTeX！！\cite{2013浅谈使用}，有 \env{bibliography}，一个 \pkg{cite} 包打天下！不要太爽。
-
-
-\begin{figure}[hbt]
-    \centering
-    \includegraphics[width=0.5\textwidth]{latex.jpg}
-    \caption{LaTeX}
-    \label{F.latex}
-\end{figure}
-
-插入公式，对 \app{Word} 小白来说，公式居中编号靠右就是一道百度搜索能力过滤器。
-
-\app{Word} 里编辑三线表，啊烦躁。
-
-等等等等……
-
-让我们，专心写论文好不好？
-
-爱你们。
-
+\subsection{课题基础及国内外研究进展}
+为了解决模型无法得知外部数据的问题，近年来 Retrieval Augmented Generation（RAG）技术被提出并广泛应用。
+RAG 技术根据用户的 prompt 来检索相关的外部知识库文档，并在推理中一起提交给模型作为输入，让模型能够得知新的信息。
+RAG 技术确实有效，但仍然有一些问题，比如：难以根据文档被创建的时间关系逻辑来推理，每次推理都需要重新检索，检索结果可解释性低等。
+RAG 技术缺乏对知识的统一组织和长期维护能力。
 
 \subsection{主要研究工作}
-虽然我 \LaTeX 水平也很水……但是通过大量 \oper{debug} 也勉强给大家凑出来一个格式绝对标准的 \LaTeX 模板，模板代码丑就丑吧，能用就行。写了大量注释，有一点 \LaTeX 基础就可以根据自己需要修改 \cls{SZTUthesis.cls} 文件。
+本文围绕着高效利用个人知识库来拓宽 LLM 模型的应用边界问题展开研究，主要工作包括：
 
-(1) 提供图片插入示例。
+(1) 处理用户过往的笔记/博客/对话内容，提取出事实（Fact），基于此描述用户的背景信息。
 
-(2) 提供表格插入示例。
+(2) 根据 Fact 推理出用户的兴趣和需求，基于此推荐给用户一些能力提升的资料，并能规划和持续追踪用户的学习进度。
 
-(3) 提供公式插入示例。
-
-(4) 提供参考文献插入示例。
+(3) 记录用户的知识库变化日志，基于此分析用户最近的活动状态。
 
 \subsection{论文组织结构}
 
@@ -75,10 +52,10 @@
 \emph{单图布局如图~\ref{F.sztu_single} 所示。}
 
 \begin{figure}[hbt]
-\centering
-\includegraphics[width=0.5\textwidth]{sztu.png}
-\caption{单图布局示例}
-\label{F.sztu_single}
+  \centering
+  \includegraphics[width=0.5\textwidth]{sztu.png}
+  \caption{单图布局示例}
+  \label{F.sztu_single}
 \end{figure}
 
 \subsection{位置固定（\texttt{[H]}，非浮动）}
@@ -90,10 +67,10 @@
 第一段占位文字：\lipsum[1]
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.35\textwidth]{sztu.png}
-    \caption{非浮动单图示例（\texttt{[H]}）}
-    \label{F.here_fixed}
+  \centering
+  \includegraphics[width=0.35\textwidth]{sztu.png}
+  \caption{非浮动单图示例（\texttt{[H]}）}
+  \label{F.here_fixed}
 \end{figure}
 
 第二段占位文字：\lipsum[2]
@@ -105,33 +82,33 @@
 \emph{横排布局如图~\ref{F.sztu_row} 所示。}
 
 \begin{figure}[!htb]
-    \centering
-    \begin{subfigure}[t]{0.24\linewidth}
-        \begin{minipage}[b]{1\linewidth}
-        \includegraphics[width=1\linewidth]{sztu.png}
-        \caption{可以增加描述}
-        \end{minipage}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.24\linewidth}
-        \begin{minipage}[b]{1\linewidth}
-        \includegraphics[width=1\linewidth]{sztu.png}
-        \caption{}
-        \end{minipage}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.24\linewidth}
-        \begin{minipage}[b]{1\linewidth}
-        \includegraphics[width=1\linewidth]{sztu.png}
-        \caption{}
-        \end{minipage}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.24\linewidth}
-        \begin{minipage}[b]{1\linewidth}
-        \includegraphics[width=1\linewidth]{sztu.png}
-        \caption{}
-        \end{minipage}
-    \end{subfigure}
-    \caption{横排布局示例}
-    \label{F.sztu_row}
+  \centering
+  \begin{subfigure}[t]{0.24\linewidth}
+    \begin{minipage}[b]{1\linewidth}
+      \includegraphics[width=1\linewidth]{sztu.png}
+      \caption{可以增加描述}
+    \end{minipage}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.24\linewidth}
+    \begin{minipage}[b]{1\linewidth}
+      \includegraphics[width=1\linewidth]{sztu.png}
+      \caption{}
+    \end{minipage}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.24\linewidth}
+    \begin{minipage}[b]{1\linewidth}
+      \includegraphics[width=1\linewidth]{sztu.png}
+      \caption{}
+    \end{minipage}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.24\linewidth}
+    \begin{minipage}[b]{1\linewidth}
+      \includegraphics[width=1\linewidth]{sztu.png}
+      \caption{}
+    \end{minipage}
+  \end{subfigure}
+  \caption{横排布局示例}
+  \label{F.sztu_row}
 \end{figure}
 
 \lipsum
@@ -140,21 +117,21 @@
 \emph{竖排布局如图\ref{F.sztu_col}所示。}
 
 \begin{figure}[!htb]
-    \centering
-    \begin{subfigure}[t]{0.15\linewidth}
-        \begin{minipage}[b]{1\linewidth}
-        \includegraphics[width=1\linewidth]{sztu.png}
-        \caption{}
-        \end{minipage}
-    \end{subfigure}\\
-    \begin{subfigure}[t]{0.15\linewidth}
-        \begin{minipage}[b]{1\linewidth}
-        \includegraphics[width=1\linewidth]{sztu.png}
-        \caption{}
-        \end{minipage}
-    \end{subfigure}
-    \caption{竖排布局示例}
-    \label{F.sztu_col}
+  \centering
+  \begin{subfigure}[t]{0.15\linewidth}
+    \begin{minipage}[b]{1\linewidth}
+      \includegraphics[width=1\linewidth]{sztu.png}
+      \caption{}
+    \end{minipage}
+  \end{subfigure}\\
+  \begin{subfigure}[t]{0.15\linewidth}
+    \begin{minipage}[b]{1\linewidth}
+      \includegraphics[width=1\linewidth]{sztu.png}
+      \caption{}
+    \end{minipage}
+  \end{subfigure}
+  \caption{竖排布局示例}
+  \label{F.sztu_col}
 \end{figure}
 
 \lipsum
@@ -162,50 +139,49 @@
 \subsection{竖排多图横排布局}
 
 \begin{figure}[!htb]
-    \centering
-    \begin{subfigure}[t]{0.13\linewidth}
-        \begin{minipage}[b]{1\linewidth}
-        \includegraphics[width=1\linewidth]{sztu.png} \vspace{-1ex} \vfill
-        \includegraphics[width=1\linewidth]{sztu.png}
-        \end{minipage}
-        \caption{}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.13\linewidth}
-        \begin{minipage}[b]{1\linewidth}
-        \includegraphics[width=1\linewidth]{sztu.png} \vspace{-1ex} \vfill
-        \includegraphics[width=1\linewidth]{sztu.png}
-        \end{minipage}
-        \caption{}
-    \end{subfigure}
-    \caption{竖排多图横排布局}
-    \label{F.sztu_col_row}
+  \centering
+  \begin{subfigure}[t]{0.13\linewidth}
+    \begin{minipage}[b]{1\linewidth}
+      \includegraphics[width=1\linewidth]{sztu.png} \vspace{-1ex} \vfill
+      \includegraphics[width=1\linewidth]{sztu.png}
+    \end{minipage}
+    \caption{}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.13\linewidth}
+    \begin{minipage}[b]{1\linewidth}
+      \includegraphics[width=1\linewidth]{sztu.png} \vspace{-1ex} \vfill
+      \includegraphics[width=1\linewidth]{sztu.png}
+    \end{minipage}
+    \caption{}
+  \end{subfigure}
+  \caption{竖排多图横排布局}
+  \label{F.sztu_col_row}
 \end{figure}
 
 \emph{竖排多图横排布局如图~\ref{F.sztu_col_row} 所示。注意看(a)、(b)编号与图关系。}
-
 
 \subsection{横排多图竖排布局}
 
 \lipsum
 
 \begin{figure}[!htb]
-    \centering
-    \begin{subfigure}[t]{0.3\linewidth}
-        \begin{minipage}[b]{1\linewidth}
-        \includegraphics[width=0.45\linewidth]{sztu.png}
-        \includegraphics[width=0.45\linewidth]{sztu.png}
-        \end{minipage}
-        \caption{}
-    \end{subfigure}\\
-    \begin{subfigure}[t]{0.3\linewidth}
-        \begin{minipage}[b]{1\linewidth}
-        \includegraphics[width=0.45\linewidth]{sztu.png}
-        \includegraphics[width=0.45\linewidth]{sztu.png}
-        \end{minipage}
-        \caption{}
-    \end{subfigure}
-    \caption{横排多图竖排布局}
-    \label{F.sztu_row_col}
+  \centering
+  \begin{subfigure}[t]{0.3\linewidth}
+    \begin{minipage}[b]{1\linewidth}
+      \includegraphics[width=0.45\linewidth]{sztu.png}
+      \includegraphics[width=0.45\linewidth]{sztu.png}
+    \end{minipage}
+    \caption{}
+  \end{subfigure}\\
+  \begin{subfigure}[t]{0.3\linewidth}
+    \begin{minipage}[b]{1\linewidth}
+      \includegraphics[width=0.45\linewidth]{sztu.png}
+      \includegraphics[width=0.45\linewidth]{sztu.png}
+    \end{minipage}
+    \caption{}
+  \end{subfigure}
+  \caption{横排多图竖排布局}
+  \label{F.sztu_row_col}
 \end{figure}
 
 \emph{横排多图竖排布局如图~\ref{F.sztu_row_col} 所示。注意看(a)、(b)编号与图关系。}
@@ -215,11 +191,10 @@
 
 这里再测试一下不同章节的公式编号
 \begin{equation}
-p_{i} = \frac{e^{-\varepsilon_{i}/kT}}{\sum_{j=1}^{M}e^{-\varepsilon_{j}/kT}}
+  p_{i} = \frac{e^{-\varepsilon_{i}/kT}}{\sum_{j=1}^{M}e^{-\varepsilon_{j}/kT}}
 \end{equation}
 
 \newpage    % 两个章节之间分页，不想分的话可注释掉
-
 
 \section{表格插入示例}
 
@@ -228,19 +203,19 @@ p_{i} = \frac{e^{-\varepsilon_{i}/kT}}{\sum_{j=1}^{M}e^{-\varepsilon_{j}/kT}}
   \caption{学校文件里对表格的要求不是很高，不过按照学术论文的一般规范，表格为三线表。}
   \label{T.example}
   \begin{tabular}{llllll}
-  \hline
-   & A  & B  & C  & D  & E \\
-  \hline
-1 	& 212 & 414 & 4 		& 23 & fgw	\\
-2 	& 212 & 414 & v 		& 23 & fgw	\\
-3 	& 212 & 414 & vfwe		& 23 & 长一些的内容	\\
-4 	& 212 & 414 & 4fwe		& 23 & 嗯	\\
-5 	& af2 & 4vx & 4 		& 23 & 长一些的内容	\\
-6 	& af2 & 4vx & 4 		& 23 & fgw	\\
-7 	& 212 & 414 & 4 		& 23 & fgw	\\
+    \hline
+    & A  & B  & C  & D  & E \\
+    \hline
+    1   & 212 & 414 & 4     & 23 & fgw  \\
+    2   & 212 & 414 & v     & 23 & fgw  \\
+    3   & 212 & 414 & vfwe    & 23 & 长一些的内容  \\
+    4   & 212 & 414 & 4fwe    & 23 & 嗯  \\
+    5   & af2 & 4vx & 4     & 23 & 长一些的内容  \\
+    6   & af2 & 4vx & 4     & 23 & fgw  \\
+    7   & 212 & 414 & 4     & 23 & fgw  \\
 
-\hline{}
-\end{tabular}
+    \hline{}
+  \end{tabular}
 \end{table}
 
 \emph{表格如表~\ref{T.example} 所示，\LaTeX 表格技巧很多，这里不再详细介绍。}
@@ -255,14 +230,13 @@ p_{i} = \frac{e^{-\varepsilon_{i}/kT}}{\sum_{j=1}^{M}e^{-\varepsilon_{j}/kT}}
 
 \emph{公式插入示例如公式~\eqref{E.example} 所示。}
 \begin{equation}
-\gamma_x=
-\begin{cases}
-  0, & \text{if $|x| \leq \delta$} \\
-  x, & \text{otherwise}
-\end{cases}
-\label{E.example}
+  \gamma_x=
+  \begin{cases}
+    0, & \text{if $|x| \leq \delta$} \\
+    x, & \text{otherwise}
+  \end{cases}
+  \label{E.example}
 \end{equation}
-
 
 \newpage    % 两个章节之间分页，不想分的话可注释掉
 
@@ -276,43 +250,42 @@ p_{i} = \frac{e^{-\varepsilon_{i}/kT}}{\sum_{j=1}^{M}e^{-\varepsilon_{j}/kT}}
 
 \newpage    % 两个章节之间分页，不想分的话可注释掉
 
-
 \section{总结与展望}
 
 \noindent{纯数字编号}
 \begin{enumerate}
- \item XXXXXXXXXX
- \label{item1}
- \item XXXXXXXXXX
- \item XXXXXXXXXX
+  \item XXXXXXXXXX
+    \label{item1}
+  \item XXXXXXXXXX
+  \item XXXXXXXXXX
 \end{enumerate}
 罗马编号
 \begin{enumerate}[label=(\roman*)]
- \item XXXXXXXXXX
- \label{item2}
- \item XXXXXXXXXX
- \item XXXXXXXXXX
+  \item XXXXXXXXXX
+    \label{item2}
+  \item XXXXXXXXXX
+  \item XXXXXXXXXX
 \end{enumerate}
 括号编号
 \begin{enumerate}[label=(\arabic*)]
- \item XXXXXXXXXX
- \label{item3}
- \item XXXXXXXXXX
- \item XXXXXXXXXX
+  \item XXXXXXXXXX
+    \label{item3}
+  \item XXXXXXXXXX
+  \item XXXXXXXXXX
 \end{enumerate}
 半括号编号
 \begin{enumerate}[label=\arabic*)]
- \item XXXXXXXXXX
- \label{item4}
- \item XXXXXXXXXX
- \item XXXXXXXXXX
+\item XXXXXXXXXX
+  \label{item4}
+\item XXXXXXXXXX
+\item XXXXXXXXXX
 \end{enumerate}
 小字母编号
 \begin{enumerate}[label=\alph*)]
- \item XXXXXXXXXX
- \label{item5}
- \item XXXXXXXXXX
- \item XXXXXXXXXX
+\item XXXXXXXXXX
+\label{item5}
+\item XXXXXXXXXX
+\item XXXXXXXXXX
 \end{enumerate}
 
 引用测试,正如~\ref{item1}、\ref{item2}、\ref{item3}、\ref{item4}、\ref{item5} 所示
@@ -327,6 +300,5 @@ p_{i} = \frac{e^{-\varepsilon_{i}/kT}}{\sum_{j=1}^{M}e^{-\varepsilon_{j}/kT}}
 （2）随着XX，XX具有XX的问题，仍值得进一步XX。
 
 （3）本课题在XX有了XX，但是XX的XX还存在XX，所以XX。
-
 
 \newpage
