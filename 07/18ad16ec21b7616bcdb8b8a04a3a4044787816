@@ -1,0 +1,46 @@
+AGENTS.md
+  7a74668b9f844944 1-6,8-48
+thesis-references.bib
+  d798f2022c297e1e 2-51
+content/additional.tex
+  d798f2022c297e1e 5-14
+content/abstracten.tex
+  d798f2022c297e1e 5,8,10,12
+content/content.tex
+  d798f2022c297e1e 2-3,6-76,78,80,82,84,86,88,90,92,94,96,98,100,102,104,106,108,110,112,114,116-184,186-188,191-193,195,197,199,201-225,227-229,232-238,240,242,244,246-248,250-252,255-261,263,265-267,269-286,288,290,292,294-306,308,310,312,314,316-329,331,333,335-352,354,356,360-362,364-371,376-382,384,386,388,390-394,397-398,401-438,440,442-619,621,623,625-726,730-778
+content/abstractcn.tex
+  d798f2022c297e1e 10,12,14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "0718ad16ec21b7616bcdb8b8a04a3a4044787816",
+  "prompts": {
+    "7a74668b9f844944": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_2229dc10effe42FpoVBxhXuo8U",
+        "model": "mimo/mimo-v2.5-pro"
+      },
+      "human_author": "Kailong Jiang",
+      "messages": [],
+      "total_additions": 64,
+      "total_deletions": 0,
+      "accepted_lines": 46,
+      "overriden_lines": 1
+    },
+    "d798f2022c297e1e": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_2229a5074ffeoOiwtFGX48KP3h",
+        "model": "mimo/mimo-v2.5-pro"
+      },
+      "human_author": "Kailong Jiang",
+      "messages": [],
+      "total_additions": 1124,
+      "total_deletions": 622,
+      "accepted_lines": 766,
+      "overriden_lines": 1
+    }
+  }
+}
