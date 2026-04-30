@@ -32,3 +32,6 @@
 *.thm
 
 .codex
+*.pdf
+*.doc
+*.docx
