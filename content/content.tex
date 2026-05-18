@@ -796,7 +796,7 @@ llm = ChatOpenAI(
 
 \subsection{文档摘要}
 
-文档摘要通过 qwen3.6-plus 的 Responses API 生成。提示词要求输出不超过 30 个词的纯文本摘要，生成结果存入 DocumentSummary 表。
+文档摘要通过 qwen3.6-plus 的 Responses API 生成，属于生成式摘要（Abstractive Summarization）\cite{see2017pgsum}。提示词要求输出不超过 30 个词的纯文本摘要，生成结果存入 DocumentSummary 表。
 
 该功能虽然实现简单，但用户价值显著——用户在文档列表页即可查看每篇文档的简短概括，无需点开全文，大大提升了浏览效率。
 
