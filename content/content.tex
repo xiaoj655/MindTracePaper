@@ -227,18 +227,7 @@ RAG 技术的出现具有里程碑意义。在 RAG 之前，LLM 的知识完全�
 
 \begin{figure}[htb]
   \centering
-  \fbox{
-    \begin{minipage}{0.86\textwidth}
-      \centering
-      \app{SvelteKit} 前端\\[0.5em]
-      $\downarrow$\\[0.5em]
-      \app{Django Ninja} API\\[0.5em]
-      $\downarrow$\\[0.5em]
-      \app{LangGraph} 智能体 / \app{Celery} Worker\\[0.5em]
-      $\downarrow$\\[0.5em]
-      \app{PostgreSQL} + \pkg{pgvector} / \app{Redis} / \app{DashScope} API
-    \end{minipage}
-  }
+  \includegraphics[width=0.9\textwidth]{architecture.png}
   \caption{系统总体架构}
   \label{F.architecture}
 \end{figure}
@@ -336,7 +325,7 @@ RAG 技术的出现具有里程碑意义。在 RAG 之前，LLM 的知识完全�
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.9\textwidth]{database_schema.png}
+  \includegraphics[width=1\textwidth]{database_schema.png}
   \caption{数据库设计}
   \label{F.database_schema} 
 \end{figure}
@@ -515,6 +504,7 @@ Prompt 设计是本文系统能否稳定运行的关键。工程系统中的 LLM
 
 这种划分的核心思路是：把自由生成和结构化生成分开，把长期记忆和可追溯知识分开。智能体回答保留自然语言表达空间；Memory 必须严格可解析；Wiki 页面需要可读、可合并、可引用；摘要则只提供后续处理的压缩入口。
 
+\Needspace{18\baselineskip}
 \subsubsection{智能体系统提示词}
 
 智能体的系统提示词定义了角色和行为规范。核心部分是这样的：
@@ -533,6 +523,7 @@ documents(blog, notes etc.)
 
 提示词里还定义了回答风格和工具使用规则。对于知识库相关问题，智能体优先使用 Wiki 工具；当 Wiki 页面不足以回答问题时，再使用文档分块检索工具。
 
+\Needspace{18\baselineskip}
 \subsubsection{Memory 更新提示词}
 
 Memory 更新提示词用于维护结构化用户记忆。模型读取当前 Memory 和按时间倒序排列的近期文档摘要，输出固定 JSON：user 部分保存段落式用户上下文，history 部分保存条目式历史记录。
@@ -675,6 +666,7 @@ Wiki 相关工具则用于读取系统整理后的知识结构。get\_wiki\_inde
 
 基础服务用 \app{Docker Compose} 管理，包括 \app{PostgreSQL}（\pkg{pgvector} 官方镜像）、\app{Redis} 和 \app{pgweb}（数据库 Web 管理工具）。\app{Docker Compose} 的使用使得开发环境的搭建变得简单——只需一条命令即可启动所有基础服务，避免了手动安装和配置的繁琐过程。同时，Docker 容器化也保证了开发环境的一致性，减少了"在我机器上能运行"的问题。
 
+\Needspace{18\baselineskip}
 \subsection{文档导入}
 
 文档导入的 API 端点为 \oper{POST /api/document/}，接收 title、content、source 三个字段。接口创建 Document 记录后，通过 \app{Celery} 的 \oper{delay} 方法触发异步处理任务：
@@ -754,6 +746,7 @@ Wiki 构建由 ingest\_document\_task 触发，核心实现位于 apps/wiki/serv
 
 Wiki 层的核心价值在于将原始文档整理为可浏览、可检索、可被智能体引用的结构化知识页面。与向量检索相比，Wiki 页面具有更明确的主题边界和可读性；与 Memory 相比，Wiki 更关注外部知识内容而非用户画像。两者互补而非替代。
 
+\Needspace{18\baselineskip}
 \subsection{检索实现}
 
 检索的核心实现如下：
@@ -771,6 +764,7 @@ results = ChunkEmbedding.objects.order_by(
 
 默认 top\_k = 5，该值在实验中表现良好。过小可能遗漏相关结果，过大则会增加 LLM 的输入长度和成本。
 
+\Needspace{18\baselineskip}
 \subsection{智能体问答}
 
 智能体的初始化在 agent\_runtime/graph/chat.py 中完成，关键步骤包括：

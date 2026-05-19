@@ -62,6 +62,8 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \RequirePackage{cprotect}
 % 设置代码环境
 \RequirePackage{listings}
+% 预留段落/代码块所需空间，避免标题与后续长代码块跨页分离
+\RequirePackage{needspace}
 % 首行缩进
 \RequirePackage{indentfirst}
 % warning: ccaption宏包不能出现在 caption 宏包之后
