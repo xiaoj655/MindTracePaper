@@ -571,6 +571,7 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
     % { \zihao{-2} \bfseries \heiti 参考文献 \par}
     \phantomsection % 使得hyperref目录能够跳转到正确的位置
     \addcontentsline{toc}{section}{参考文献} % 由于参考文献不是section，这句把参考文献加入目录
+	\def\@biblabel##1{{\kaishu\fontsize{12}{14}\selectfont[##1]\hfill}}
 	\zihao{5} \kaishu
 	\bibliographystyle{gbt7714-numerical}
     \bibliography{thesis-references}
